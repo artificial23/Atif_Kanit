@@ -1,0 +1,48 @@
+# =====================================================================
+#  AtıfKanıt — Mevzuat Parametreleri
+#  Genel kurallar burada; unvan ve temel alana göre değişen puan tabloları
+#  alanlar.yaml dosyasındadır (profilde seçilen alan otomatik uygulanır).
+# =====================================================================
+
+indeks_hiyerarsisi:            # yukarıdan aşağı öncelik (Kural 3)
+  - "SCI / SCI-Expanded"
+  - "SSCI / AHCI"
+  - "ESCI"
+  - "Scopus"
+  - "TR Dizin"
+  - "Uluslararası Diğer Hakemli"
+  - "Ulusal Hakemli / Kitap Bölümü / Diğer"
+
+docentlik:
+  # ÜAK: "adayın yazar olarak yer almadığı yayınlarda, metin içindeki atıf
+  # sayısına bakılmaksızın atıf yapılan her eseri için" puan verilir.
+  oz_atif_haric: true
+  ortak_yazar_atfi_haric: false   # ÜAK metni yalnızca adayı hariç tutar; ortak yazar atfı
+                                  # "Şüpheli" olarak işaretlenir ama puanlanır. İsterseniz true yapın.
+  tez_atiflari_haric: true
+  # Puanlar, asgari/azami değerler unvan ve temel alana göre alanlar.yaml'dan gelir.
+
+tesvik:
+  # Akademik Teşvik Ödeneği Yönetmeliği md.7(8) ve SSS özetleri:
+  #  - Kişinin kendi yayınlarına yaptığı atıflar puanlanmaz
+  #  - Aynı eserde farklı bölümlerde yapılan atıflar tek atıf sayılır
+  #  - Tezlere yapılan / tezlerden gelen atıflar puanlanmaz
+  #  - Erken görünüm: künyesini (cilt/sayı/sayfa) ilgili yılda almışsa sayılır
+  #  - Çevirilere yapılan / çevirilerden gelen atıflar geçersizdir
+  #  - Yalnızca devlet yükseköğretim kurumlarında üretilen eserlere gelen atıflar
+  oz_atif_haric: true
+  ortak_yazar_atfi_haric: false
+  erken_gorunum_kunye_sarti: true
+  devlet_universitesi_sarti: true
+  kategori_tavani: 30              # Atıf faaliyet türü üst sınırı
+  # Puanlar temel alanınızın teşvik grubuna (A1-A4) göre alanlar.yaml'dan gelir.
+
+puan_harici_eser_turleri:          # Kural 5 — bilgilendirme amaçlı tutulur, puanlanmaz
+  - "Tez"
+  - "Preprint"
+  - "Erratum / Düzeltme"
+  - "Çeviri"
+
+eslestirme:
+  kaynakca_baslik_esigi: 82        # 0-100: başlık benzerliği (rapidfuzz partial_ratio)
+  baslik_tekillestirme_esigi: 93   # farklı kaynaklardan gelen aynı eserin birleştirilmesi

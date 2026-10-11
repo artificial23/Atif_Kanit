@@ -1,0 +1,62 @@
+# =====================================================================
+#  AtıfKanıt — Kullanıcı Profili (her akademisyen kendi kopyasını oluşturur)
+#  Oluşturmak için:  atifkanit init   (sihirbaz bu dosyayı doldurur)
+# =====================================================================
+
+kullanici:
+  ad: "Orkun"
+  soyad: "Teke"
+  unvan: "Dr. Öğr. Üyesi"     # Öğr. Gör. | Dr. Öğr. Üyesi | Doç. Dr. | Prof. Dr.
+  # Kaynakçalarda karşılaşılabilecek yazım biçimleri (otomatik varyantlar da üretilir:
+  # "Teke, O.", "O. Teke", "Orkun Teke", "TEKE O" ...). Evlilik öncesi soyadı vb. buraya.
+  ek_isim_varyantlari: []
+  orcid: ""                    # örn. 0000-0002-1234-5678  (EN GÜVENİLİR kimlik eşleştirme)
+  openalex_author_id: ""       # boş bırakılırsa ORCID'den bulunur (örn. A5023888391)
+  scopus_author_id: ""         # Scopus API kullanılacaksa
+  researcher_id: ""            # WoS ResearcherID (örn. ABC-1234-2020)
+  google_scholar_id: ""        # GS profil kullanıcı kimliği (user=XXXX)
+  avesis_url: ""               # örn. https://avesis.cbu.edu.tr/ad.soyad  (eserlerinizin indeks + quartile bilgisi)
+  kurum: "Manisa Celal Bayar Üniversitesi"
+  eposta: ""                   # Unpaywall/OpenAlex/Crossref "polite" erişim için gerekli
+  doktora_mezuniyet_tarihi: "" # YYYY-AA-GG  (Doçentlik "doktora sonrası" ayrımı için ZORUNLU)
+  temel_alan: ""               # ÜAK temel alanı — alanlar.yaml'daki adlardan biri (puan tabloları buna göre seçilir)
+  kurum_turu: "devlet"         # devlet | vakif (teşvik: devlet üniversitesi şartı)
+
+donem:
+  # Akademik Teşvik: başvuru yılı N ise, N-1 yılındaki faaliyetler değerlendirilir.
+  tesvik_basvuru_yili: 2026    # → 2025 yılında "kesinleşmiş" atıflar sayılır
+
+arsiv:
+  # Tüm kanıt klasörleri ve Excel tablosu bu klasörün altında oluşturulur.
+  kok_klasor: "~/Docentlik_Atif_Arsivi"
+
+# Scopus / WoS / Google Scholar için API anahtarı GEREKMEZ: `atifkanit rehberli` (veya arayüzde
+# "Atıf Tarama > Tarayıcıyı aç") kurum erişiminizle tarar. Aşağıdakiler yalnız ileri kullanıcılar içindir.
+kaynaklar:
+  # Ücretsiz/açık kaynaklar (anahtar gerektirmez)
+  openalex: true
+  opencitations: true
+  semantic_scholar: true
+  crossref: true               # künye zenginleştirme + erken görünüm tespiti
+  unpaywall: true              # açık erişim PDF bulma
+  # Kurumsal/ücretli API'ler — anahtar girilmezse atlanır, yerine "dışa aktarım" dosyası içe aktarılır
+  scopus: false
+  wos: false
+  serpapi_scholar: false
+
+api_anahtarlari:
+  openalex: ""                 # https://openalex.org/settings/api  (2026'dan itibaren önerilir)
+  semantic_scholar: ""         # opsiyonel, hız sınırını artırır
+  opencitations: ""            # opsiyonel erişim jetonu
+  elsevier: ""                 # https://dev.elsevier.com  (Scopus)
+  elsevier_insttoken: ""       # kurum dışı erişimde Elsevier'den alınır
+  wos_starter: ""              # https://developer.clarivate.com (UT numarası doğrulama)
+  wos_expanded: ""             # kurum aboneliği gerektirir (atıf yapan listesi + edition)
+  serpapi: ""                  # Google Scholar "cited by" listesi için (ücretli)
+
+kanit:
+  dpi: 160                     # ekran görüntüsü çözünürlüğü
+  jpeg_kalitesi: 82            # birleşik PDF boyut optimizasyonu
+  tarayici_ile_ekran_goruntusu: true   # Playwright ile web sayfası ekran görüntüsü (Kanıt 1/2 yedek)
+  tarayici_profil_klasoru: "~/.atifkanit/tarayici"  # kurumsal oturum (WoS/Scopus) burada saklanır
+  pdf_indirme_zaman_asimi: 45

@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "atifkanit"
+version = "1.0.0"
+description = "Doçentlik ve Akademik Teşvik için atıf tespit ve kanıt paketi üreticisi"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "requests>=2.31",
+    "PyYAML>=6.0",
+    "openpyxl>=3.1",
+    "pymupdf>=1.24",
+    "rapidfuzz>=3.0",
+    "pandas>=2.0",
+    "xlrd>=2.0",
+    "streamlit>=1.50",
+    "playwright>=1.45",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[project.scripts]
+atifkanit = "atifkanit.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["atifkanit*"]

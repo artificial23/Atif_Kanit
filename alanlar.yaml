@@ -1,0 +1,116 @@
+# =====================================================================
+#  AtıfKanıt — Unvan ve ÜAK Temel Alanına Göre Kurallar
+#  Profilde seçilen unvan ve temel alan, bu dosyadaki değerleri devreye sokar.
+#
+#  Kaynaklar (Ekim 2026 itibarıyla ikincil özetler; ÜAK tablosuyla doğrulayın):
+#   - ÜAK 2024+ doçentlik kriterleri, "Atıflar" maddesi: SCIE/SSCI/AHCI/ESCI/Scopus 3 puan;
+#     BKCI kapsamındaki kitapta 2; TR Dizin dergide 2; diğer ulusal/uluslararası kitap ve dergi 1.
+#     Doktora sonrası eserlere yapılan atıflardan en az 5, en fazla 10 puan.
+#   - Akademik Teşvik Ödeneği Yönetmeliği Tablo-4 alan grupları: A1, A2, A3, A4.
+#     2025 başvurularından itibaren "alan endeksleri" kalktığı için ESCI/Scopus
+#     "diğer uluslararası hakemli" olarak puanlanır (esci_scopus_alan_endeksi: false).
+# =====================================================================
+
+unvanlar:
+  "Öğr. Gör.":
+    hedefler: ["tesvik", "docentlik"]
+    not: "Doktoranızı tamamladıysanız doçentlik hesapları da yapılır; tamamlamadıysanız yalnız teşvik."
+  "Dr. Öğr. Üyesi":
+    hedefler: ["docentlik", "tesvik"]
+    not: "Ana hedef doçentlik başvurusu; teşvik hesapları da yapılır."
+  "Doç. Dr.":
+    hedefler: ["tesvik", "profesorluk"]
+    not: "Doçentlik puanları bilgi amaçlı gösterilir. Profesörlük için üniversitenizin atama kriterlerindeki atıf şartına bakın."
+  "Prof. Dr.":
+    hedefler: ["tesvik"]
+    not: "Teşvik hesapları ve atıf arşivi."
+
+docentlik_ortak:
+  # ÜAK "Atıflar" maddesi — tüm temel alanlarda aynı yapı
+  puanlar:
+    "SCI / SCI-Expanded": 3
+    "SSCI / AHCI": 3
+    "ESCI": 3
+    "Scopus": 3
+    "Kitap (BKCI)": 2
+    "TR Dizin": 2
+    "Uluslararası Diğer Hakemli": 1
+    "Ulusal Hakemli / Kitap Bölümü / Diğer": 1
+    "Kitap (Uluslararası Yayınevi)": 1
+    "Kitap (Ulusal Yayınevi)": 1
+  asgari_puan: 5        # doktora sonrası eserlerinize yapılan atıflardan
+  azami_puan: 10
+  doktora_sonrasi_eser_sarti: true   # asgari şart doktora sonrası eserlere yapılan atıflarla sağlanır
+
+tesvik_gruplari:
+  # Puan / atıf; kategori tavanı 30
+  A1:
+    "SCI / SCI-Expanded": 4
+    "SSCI / AHCI": 4
+    "ESCI": 1
+    "Scopus": 1
+    "TR Dizin": 1
+    "Uluslararası Diğer Hakemli": 1
+    "Ulusal Hakemli / Kitap Bölümü / Diğer": 0
+    "Kitap (BKCI)": 4
+    "Kitap (Uluslararası Yayınevi)": 4
+    "Kitap (Ulusal Yayınevi)": 0     # Danıştay 2024 kararıyla iptal
+  A2: &A2
+    "SCI / SCI-Expanded": 6
+    "SSCI / AHCI": 6
+    "ESCI": 2
+    "Scopus": 2
+    "TR Dizin": 2
+    "Uluslararası Diğer Hakemli": 2
+    "Ulusal Hakemli / Kitap Bölümü / Diğer": 0
+    "Kitap (BKCI)": 8
+    "Kitap (Uluslararası Yayınevi)": 8
+    "Kitap (Ulusal Yayınevi)": 0
+  A3: *A2
+  A4: *A2
+esci_scopus_alan_endeksi: false   # true yapılırsa ESCI/Scopus: A1=1.5, diğerleri=3
+
+temel_alanlar:
+  "Eğitim Bilimleri":
+    tesvik_grubu: A1
+    notlar: ["Atıflar SCIE/SSCI/ESCI/Scopus (3) ve TR Dizin (2) ağırlıklıdır."]
+  "Fen Bilimleri ve Matematik":
+    tesvik_grubu: A1
+    notlar: ["Atıfların çoğu SCIE/ESCI/Scopus dergilerinden gelir; numaralı kaynakça biçimi yaygındır."]
+  "Filoloji":
+    tesvik_grubu: A2
+    notlar: ["Kitap ve kitap bölümlerindeki atıflar yaygındır: Kanıt 1'de kitabın kapak/künye (ISBN) sayfası, Kanıt 2'de BKCI veya yayınevi kanıtı gerekir.",
+             "TR Dizin dergilerindeki atıflar 2 puandır."]
+  "Güzel Sanatlar":
+    tesvik_grubu: A4
+    dogrulama_gerekli: true
+    notlar: ["Sanat eserlerine (sergi, performans, beste vb.) katalog/kitaplarda yapılan atıflar söz konusu olabilir: manuel şablonda tür olarak 'Katalog/Sergi' belirtin ve katalog kapağı + atıf sayfasını ekleyin.",
+             "Atıf puan değerlerini Güzel Sanatlar temel alan tablosundan mutlaka doğrulayın."]
+  "Hukuk":
+    tesvik_grubu: A2
+    notlar: ["Kitap ve şerhlerdeki atıflar yaygındır (dipnot biçimi): dipnottaki atıf Kanıt 3, kaynakça/bibliyografya Kanıt 4 olarak alınır.",
+             "Kitap atıflarında yayınevi (ulusal/uluslararası) ve BKCI durumu kanıtlanmalıdır."]
+  "İlahiyat":
+    tesvik_grubu: A2
+    notlar: ["Dipnotlu atıf biçimi ve kitap atıfları yaygındır; kitap künye (ISBN) sayfasını ekleyin."]
+  "Mimarlık, Planlama ve Tasarım":
+    tesvik_grubu: A3
+    dogrulama_gerekli: true
+    notlar: ["Tasarım/proje eserlerine yapılan atıflar (yarışma kitapları, kataloglar) manuel şablonla eklenir.",
+             "Atıf puan değerlerini Mimarlık, Planlama ve Tasarım temel alan tablosundan doğrulayın."]
+  "Mühendislik":
+    tesvik_grubu: A1
+    notlar: ["Bildiri (konferans) kitaplarındaki atıflar: Scopus/WoS (CPCI) kapsamında ise ilgili kategoride, değilse 'diğer' (1 puan) sayılır."]
+  "Sağlık Bilimleri":
+    tesvik_grubu: A1
+    notlar: ["Vancouver (üst simge ¹⁸ veya [18]) biçimi yaygındır; program her iki biçimi de vurgular.",
+             "Olgu sunumu ve editöre mektuplardaki atıflar dergi indeksine göre puanlanır."]
+  "Sosyal, Beşeri ve İdari Bilimler":
+    tesvik_grubu: A2
+    notlar: ["APA (yazar-yıl) biçimi yaygındır; TR Dizin ve kitap atıfları önemli yer tutar."]
+  "Spor Bilimleri":
+    tesvik_grubu: A2
+    notlar: ["Atıfların çoğu SCIE/ESCI/Scopus ve TR Dizin dergilerindendir."]
+  "Ziraat, Orman ve Su Ürünleri":
+    tesvik_grubu: A1
+    notlar: ["Atıfların çoğu SCIE/ESCI/Scopus dergilerindendir; TR Dizin dergileri de yaygındır."]
